@@ -6,7 +6,8 @@ const HospitalSchema = new Schema({
   location: String,
   doctors: [{ 
     type: Schema.Types.ObjectId,
-    ref: 'Doctor' 
+    ref: 'Doctor',
+    autopopulate: true
   }],
 })
 
@@ -15,11 +16,13 @@ const DoctorSchema = new Schema({
   specialization: String,
   hospital: { 
     type: Schema.Types.ObjectId,
-    ref: 'Hospital' 
+    ref: 'Hospital',
+    autopopulate: true
   },
   appointments: [{
     type: Schema.Types.ObjectId,
-    ref:'Appointment'
+    ref:'Appointment',
+    autopopulate: true
   }]
 })
 
@@ -29,11 +32,13 @@ const AppointmentSchema =new Schema({
   length: Number,
   doctor: {
     type: Schema.Types.ObjectId,
-    ref: 'Doctor'
+    ref: 'Doctor',
+    autopopulate: true
   },
   patient: {
     type: Schema.Types.ObjectId,
-    ref: 'Patient'
+    ref: 'Patient',
+    autopopulate: true
   }
 })
 
