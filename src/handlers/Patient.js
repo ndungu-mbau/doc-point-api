@@ -8,7 +8,7 @@ const addPatient = async (req, res) => {
 }
 
 const getDetails = async (req, res) => {
-  const patient = await Patient.findById(req.params._id).exec()
+  const patient = await Patient.findById(req.params._id).populate('appointments').exec()
 
   res.status(200).json(patient)
 }
