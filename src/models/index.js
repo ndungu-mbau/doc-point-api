@@ -51,17 +51,17 @@ const PatientSchema = new Schema({
   }]
 })
 
-const Hospital = mongoose.model('Hospital', HospitalSchema)
-const Doctor = mongoose.model('Doctor', DoctorSchema)
-const Appointment = mongoose.model('Appointment', AppointmentSchema)
-const Patient = mongoose.model('Patient', PatientSchema)
-
 [HospitalSchema,
   DoctorSchema,
   AppointmentSchema,
   PatientSchema].foreach(schema => {
   schema.plugin(require('mongoose-autopopulate'))
 })
+
+const Hospital = mongoose.model('Hospital', HospitalSchema)
+const Doctor = mongoose.model('Doctor', DoctorSchema)
+const Appointment = mongoose.model('Appointment', AppointmentSchema)
+const Patient = mongoose.model('Patient', PatientSchema)
 
 module.exports ={
   Doctor,
