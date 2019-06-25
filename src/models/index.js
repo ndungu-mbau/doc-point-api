@@ -45,6 +45,7 @@ const AppointmentSchema =new Schema({
 const PatientSchema = new Schema({
   name: String,
   contact: String,
+  password: String,
   appointments: [{
     type: Schema.Types.ObjectId,
     ref: 'Appointment'

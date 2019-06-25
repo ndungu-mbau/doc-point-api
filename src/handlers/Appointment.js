@@ -18,7 +18,7 @@ const createAppointment = async (req, res) => {
 }
 
 const getAppointment = async (req, res) => {
-  const appointment = await Appointment.findById(req.params._id).exec()
+  const appointment = await Appointment.findById(req.params._id).populate().exec()
 
   res.status(200).json(appointment)
 }

@@ -15,6 +15,7 @@ module.exports = {
     '/hospital': Hospital.createHospital,
     '/appointment': Appointment.createAppointment,
     '/doctor': Doctor.addDoctor,
-    '/patient': Patient.addPatient
+    '/patient': Patient.addPatient,
+    '/patient/login': Patient.login
   }
 }
