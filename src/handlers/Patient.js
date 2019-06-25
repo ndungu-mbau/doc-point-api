@@ -1,18 +1,21 @@
 const { Patient } = require('../models')
-const bcrypt = require('bcrypt') 
-
-const salt = bcrypt.genSaltSync(10)
+const sha1 = require('sha1')
 
 const addPatient = async (req, res) => {
-  const { name, contact, password } = req.body
+  const { name, email, password } = req.body
+  console.log({ name, email, password })
 
-  console.log({ name, contact, password })
+  const people = await Patient.find({ email: email }).exec()
 
-  const newPassword = bcrypt.hashSync(password, salt)
-  const newPatient = new Patient({ name, contact, password:newPassword })
+  if(people.length !== 0){
+    res.status(404).json({ message: "Email is already in use" })
+  }
+
+  const newPassword = sha1(password)
+  const newPatient = new Patient({ name, email, password:newPassword })
 
   await newPatient.save()
-  res.status(200).json(newPatient)
+  res.status(200).json({ ok:true })
 }
 
 const login = async (req, res) => {
@@ -25,6 +28,10 @@ const login = async (req, res) => {
   }
 
   const success = await bcrypt.compare(password, patient.password)
+
+  if(!success){
+
+  }
 
   if(!success){
     res.status(401).json({ message: 'Wrong password', ok : false })

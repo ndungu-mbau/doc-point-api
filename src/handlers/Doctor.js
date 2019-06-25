@@ -15,7 +15,7 @@ const addDoctor = async (req, res) => {
 }
 
 const getDoctor = async (req, res) => {
-  const doctor = await Doctor.findById(req.params._id).populate('hospital').populate('appointments').exec()
+  const doctor = await Doctor.findById(req.params._id).populate('hospital').populate('timeslots').exec()
 
   res.status(200).json(doctor)
 }

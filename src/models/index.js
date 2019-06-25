@@ -23,7 +23,11 @@ const DoctorSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref:'Appointment',
     autopopulate: true
-  }]
+  }],
+  timeslots: {
+    type: Schema.Types.ObjectId,
+    ref: 'Timeslot'
+  }
 })
 
 const AppointmentSchema =new Schema({
@@ -42,9 +46,17 @@ const AppointmentSchema =new Schema({
   }
 })
 
+const TimeSlotsSchema = new Schema({
+  timeStart: String,
+  lenght : Number
+})
+
 const PatientSchema = new Schema({
   name: String,
-  contact: String,
+  email: {
+    type: String,
+    unique: true
+  },
   password: String,
   appointments: [{
     type: Schema.Types.ObjectId,
@@ -56,10 +68,12 @@ const Hospital = mongoose.model('Hospital', HospitalSchema)
 const Doctor = mongoose.model('Doctor', DoctorSchema)
 const Appointment = mongoose.model('Appointment', AppointmentSchema)
 const Patient = mongoose.model('Patient', PatientSchema)
+const Timeslots = mongoose.model('Timeslot', TimeSlotsSchema)
 
 module.exports ={
-  Doctor,
   Hospital,
+  Doctor,
   Appointment,
-  Patient
+  Patient,
+  Timeslots
 }
