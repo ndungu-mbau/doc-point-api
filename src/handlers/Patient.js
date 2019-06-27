@@ -42,7 +42,7 @@ const login = async (req, res) => {
   } else {
     const token = jwt.sign({patient: patient.id, email: patient.email}, SECRET)
     res.cookie('auth', token)
-    res.status(200).json({ message: "Logged in successfully ", ok: true })
+    res.status(200).json({ message: "Logged in successfully ", ok: true, token })
   }
 }
 
