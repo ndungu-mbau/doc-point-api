@@ -3,13 +3,15 @@ const Appointment = require('./Appointment')
 const Patient = require('./Patient')
 const Doctor = require('./Doctor')
 
+const { auth } = require('../utils')
+
 module.exports = {
   get:{
     '/hospital': Hospital.getAllHospitals,
     '/hospital/:_id': Hospital.getHospital,
     '/appointment/:_id': Appointment.getAppointment,
     '/doctor/:_id': Doctor.getDoctor,
-    '/patient/:_id': Patient.getDetails
+    '/patient': [auth, Patient.getDetails]
   },
   post:{
     '/hospital': Hospital.createHospital,

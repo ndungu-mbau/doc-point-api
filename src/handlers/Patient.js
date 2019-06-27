@@ -6,7 +6,6 @@ const { SECRET } = process.env
 
 const addPatient = async (req, res) => {
   const { name, email, password } = req.body
-  console.log({ name, email, password })
 
   const people = await Patient.find({ email: email }).exec()
 
@@ -21,7 +20,7 @@ const addPatient = async (req, res) => {
     const token = jwt.sign({patient: newPatient.id, email: newPatient.email}, SECRET)
     res.cookie('auth', token)
 
-    res.status(200).json({ ok:true })
+    res.status(200).json({ message: "Created user successfully ", ok: true, token })
   }
 }
 
