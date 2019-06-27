@@ -11,8 +11,8 @@ const createHospital = async (req, res) => {
 const getHospital = async (req, res) => {
   const { _id } = req.params
 
-  const hospitalDetails = await Hospital.findById(_id).exec()
-  res.status(200).json({ hospitals: hospitalDetails})
+  const hospitalDetails = await Hospital.findById(_id).populate('doctors').exec()
+  res.status(200).json({ hospital: hospitalDetails})
 }
 
 const getAllHospitals = async (req, res) => {
